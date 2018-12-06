@@ -1,8 +1,11 @@
 OUTPUT    := build
-JFLAGS    := -d $(OUTPUT) -cp $(OUTPUT)
+JFLAGS    := -d $(OUTPUT)
 JAVAC     := javac
 
-SRC       := Point2D.java Hello.java
+PACKAGES  := model controller view main
+SRC_DIR   := $(addprefix src/,$(PACKAGES))
+
+SRC       := $(foreach sdir,$(SRC_DIR),$(wildcard $(sdir)/*.java))
 CLASS     := $(SRC:.java=.class)
 
 all: output $(CLASS)
